@@ -7,12 +7,6 @@ import 'package:flutter/material.dart';
 
 enum Detector {
   barcode,
-  face,
-  label,
-  cloudLabel,
-  text,
-  cloudText,
-  cloudDocumentText
 }
 
 class BarcodeDetectorPainter extends CustomPainter {
@@ -40,9 +34,22 @@ class BarcodeDetectorPainter extends CustomPainter {
       ..strokeWidth = 2.0;
 
     for (Barcode barcode in barcodeLocations) {
-      paint.color = Colors.green;
+      var textSpan = TextSpan(
+        text: barcode.rawValue,
+        style: TextStyle(color: Colors.white, fontSize: 20),
+      );
 
+      TextPainter tp = TextPainter(
+        text: textSpan,
+        textDirection: TextDirection.ltr,
+      );
+      paint.color = Colors.green;
       canvas.drawRect(scaleRect(barcode), paint);
+      tp.layout();
+      tp.paint(
+          canvas,
+          Offset(barcode.boundingBox.left * scaleX,
+              barcode.boundingBox.top * scaleY));
     }
   }
 

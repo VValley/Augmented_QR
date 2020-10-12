@@ -18,7 +18,7 @@ class CameraPreviewScanner extends StatefulWidget {
 class _CameraPreviewScannerState extends State<CameraPreviewScanner> {
   List<Barcode> _scanResults;
   CameraController _camera;
-  Detector _currentDetector = Detector.text;
+  Detector _currentDetector = Detector.barcode;
   bool _isDetecting = false;
   CameraLensDirection _direction = CameraLensDirection.back;
 
